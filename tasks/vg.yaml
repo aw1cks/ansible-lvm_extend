@@ -66,9 +66,10 @@
     lvm_extend_disks.stdout_lines | length > 0 and
     lvm_extend_vg_exists is defined and
     lvm_extend_vg_exists.rc > 0 and
-    lvm_extend_vg.value.disks | intersect(lvm_extend_disks.stdout_lines) | length > 0 and
-    ('size' not in item or
-    item.size == None)
+    lvm_extend_vg.value.disks | intersect(lvm_extend_disks.stdout_lines) | length > 0 and (
+      'size' not in item or
+      item.size == None
+    )
   loop: "{{ lvm_extend_vg.value.vols }}"
 
 - name: Extend LVM logical volumes with specified size ({{ lvm_extend_vg.key }})
@@ -95,9 +96,10 @@
     lvm_extend_disks.stdout_lines | length > 0 and
     lvm_extend_vg_exists is defined and
     lvm_extend_vg_exists.rc == 0 and
-    lvm_extend_vg.value.disks | intersect(lvm_extend_disks.stdout_lines) | length > 0 and
-    ('size' not in item or
-    item.size == None)
+    lvm_extend_vg.value.disks | intersect(lvm_extend_disks.stdout_lines) | length > 0 and (
+      'size' not in item or
+      item.size == None
+    )
   loop: "{{ lvm_extend_vg.value.vols }}"
 
 - name: Create or resize filesystem - swap type ({{ lvm_extend_vg.key }})
